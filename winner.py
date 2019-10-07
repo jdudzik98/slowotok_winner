@@ -59,6 +59,7 @@ def find_connections(row, column):
 
     return connections
 
+results = []
 
 for row in range(4):
     for column in range(4):
@@ -70,11 +71,15 @@ for row in range(4):
                     for letter in range(len(example)):
                         for x, y in find_connections(current_position[0], current_position[1]):
                             if game_letters[x][y] == example[letter] and [x, y] not in used_letters:
-                                if letter == (len(example) - 1) and len(example)>=3:
-                                    print(game_letters[row][column] + game_letters[letter_type[0]][letter_type[1]] +
+                                if letter == (len(example) - 1):
+                                    results.append(game_letters[row][column] + game_letters[letter_type[0]][letter_type[1]] +
                                           example)
                                 current_position = [x, y]
                                 used_letters.append(current_position)
                                 break
                         if not game_letters[current_position[0]][current_position[1]] == example[letter]:
                             break
+for i in range(14,2,-1):
+    for element in results:
+        if len(element) == i:
+            print(element)
