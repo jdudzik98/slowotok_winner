@@ -66,17 +66,15 @@ for row in range(4):
             if len(data[game_letters[row][column]][game_letters[letter_type[0]][letter_type[1]]]) >= 1:
                 for example in data[game_letters[row][column]][game_letters[letter_type[0]][letter_type[1]]]:
                     current_position = [letter_type[0], letter_type[1]]
+                    used_letters = [[row, column], current_position]
                     for letter in range(len(example)):
                         for x, y in find_connections(current_position[0], current_position[1]):
-                            if game_letters[x][y] == example[letter]:
-                                if letter == (len(example)-1):
+                            if game_letters[x][y] == example[letter] and [x, y] not in used_letters:
+                                if letter == (len(example) - 1) and len(example)>=3:
                                     print(game_letters[row][column] + game_letters[letter_type[0]][letter_type[1]] +
                                           example)
                                 current_position = [x, y]
+                                used_letters.append(current_position)
                                 break
-
                         if not game_letters[current_position[0]][current_position[1]] == example[letter]:
                             break
-
-
-
